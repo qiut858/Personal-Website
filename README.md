@@ -1,3 +1,3 @@
-This is my personal webpage.
+This is the git repository for my personal webpage.
 
-You can access this page directly through zhiyuanqiu.me.
+You can access this page directly through http://csclub.uwaterloo.ca/~zyqiu/
