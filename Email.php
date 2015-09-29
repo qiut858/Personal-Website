@@ -1,4 +1,8 @@
 <?php
+
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
  
 if(isset($_POST['email'])) {
  
@@ -6,7 +10,7 @@ if(isset($_POST['email'])) {
  
     // EDIT THE 2 LINES BELOW AS REQUIRED
  
-    $email_to = "tomqiu@gmail.com";
+    $email_to = "tom-qiu@hotmail.com";
  
     $email_subject = "Hello from your Webpage";
  
@@ -34,13 +38,9 @@ if(isset($_POST['email'])) {
  
     // validation expected data exists
  
-    if(!isset($_POST['first_name']) ||
- 
-        !isset($_POST['last_name']) ||
+    if(!isset($_POST['name']) ||
  
         !isset($_POST['email']) ||
- 
-        !isset($_POST['telephone']) ||
  
         !isset($_POST['comments'])) {
  
@@ -50,13 +50,9 @@ if(isset($_POST['email'])) {
  
      
  
-    $first_name = $_POST['first_name']; // required
- 
-    $last_name = $_POST['last_name']; // required
+    $name = $_POST['name']; // required
  
     $email_from = $_POST['email']; // required
- 
-    $telephone = $_POST['telephone']; // not required
  
     $comments = $_POST['comments']; // required
  
@@ -74,15 +70,9 @@ if(isset($_POST['email'])) {
  
     $string_exp = "/^[A-Za-z .'-]+$/";
  
-  if(!preg_match($string_exp,$first_name)) {
+  if(!preg_match($string_exp,$name)) {
  
-    $error_message .= 'The First Name you entered does not appear to be valid.<br />';
- 
-  }
- 
-  if(!preg_match($string_exp,$last_name)) {
- 
-    $error_message .= 'The Last Name you entered does not appear to be valid.<br />';
+    $error_message .= 'The Name you entered does not appear to be valid.<br />';
  
   }
  
@@ -112,13 +102,9 @@ if(isset($_POST['email'])) {
  
      
  
-    $email_message .= "First Name: ".clean_string($first_name)."\n";
- 
-    $email_message .= "Last Name: ".clean_string($last_name)."\n";
+    $email_message .= "Name: ".clean_string($name)."\n";
  
     $email_message .= "Email: ".clean_string($email_from)."\n";
- 
-    $email_message .= "Telephone: ".clean_string($telephone)."\n";
  
     $email_message .= "Comments: ".clean_string($comments)."\n";
  
@@ -134,17 +120,18 @@ $headers = 'From: '.$email_from."\r\n".
  
 'X-Mailer: PHP/' . phpversion();
  
-@mail($email_to, $email_subject, $email_message, $headers);  
- 
+if (mail($email_to, $email_subject, $email_message, $headers)) {
+	echo "Thank you for the message. I will be contacting you very soon.";
+}  
+
+else {
+	echo "Something just went wrong with our PHP server";
+} 
 ?>
  
  
  
 <!-- include your own success html here -->
- 
- 
- 
-Thank you for contacting us. We will be in touch with you very soon.
  
  
  
